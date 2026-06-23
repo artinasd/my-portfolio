@@ -90,26 +90,89 @@ export const Process = () => {
   )
 }
 
-export const Stack = ({ items }) => (
-  <section className="mx-auto max-w-7xl px-4 py-20 overflow-hidden">
-     <motion.div 
-       variants={staggerContainer}
-       initial="initial"
-       whileInView="whileInView"
-       viewport={{ once: true }}
-       className="flex flex-wrap justify-center gap-4"
-     >
-        {items.map((item) => (
-          <motion.div 
-            key={item} 
-            variants={fadeInUp}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold transition-all hover:bg-emerald-500 hover:text-zinc-950 hover:shadow-glow cursor-default"
-          >
-            {item}
-          </motion.div>
-        ))}
-     </motion.div>
+const stackGroups = [
+  {
+    title: 'فرانت‌اند',
+    icon: <Monitor size={18} />,
+    color: 'from-emerald-500/20 via-emerald-500/5 to-transparent',
+    borderColor: 'border-emerald-500/20',
+    textColor: 'text-emerald-400',
+    bgColor: 'bg-emerald-500/5',
+    items: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'Framer Motion', 'Vite'],
+  },
+  {
+    title: 'بک‌اند و دیتابیس',
+    icon: <Globe size={18} />,
+    color: 'from-blue-500/20 via-blue-500/5 to-transparent',
+    borderColor: 'border-blue-500/20',
+    textColor: 'text-blue-400',
+    bgColor: 'bg-blue-500/5',
+    items: ['Node.js', 'PostgreSQL', 'Firebase'],
+  },
+  {
+    title: 'ابزار و دیزاین',
+    icon: <PenTool size={18} />,
+    color: 'from-violet-500/20 via-violet-500/5 to-transparent',
+    borderColor: 'border-violet-500/20',
+    textColor: 'text-violet-400',
+    bgColor: 'bg-violet-500/5',
+    items: ['Figma', 'GitHub', 'Vercel'],
+  },
+]
+
+export const Stack = () => (
+  <section className="mx-auto max-w-7xl px-4 py-32 overflow-hidden">
+    <motion.div {...fadeInUp} className="mb-16">
+      <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-emerald-400">
+        <Zap size={12} /> ابزارها و تکنولوژی‌ها
+      </div>
+      <h2 className="mt-6 text-4xl font-black sm:text-6xl">
+        استک فنی ما
+      </h2>
+    </motion.div>
+
+    <div className="grid gap-6 md:grid-cols-3">
+      {stackGroups.map((group, groupIndex) => (
+        <motion.div
+          key={group.title}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: groupIndex * 0.15 }}
+          viewport={{ once: true }}
+          className={`group relative overflow-hidden rounded-[2.5rem] border ${group.borderColor} ${group.bgColor} p-8 transition-all hover:shadow-glow`}
+        >
+          {/* Gradient overlay on hover */}
+          <div className={`absolute inset-0 bg-gradient-to-b ${group.color} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ${group.textColor} border border-white/10`}>
+                {group.icon}
+              </div>
+              <h3 className={`text-lg font-black ${group.textColor}`}>{group.title}</h3>
+            </div>
+
+            {/* Tech items */}
+            <div className="flex flex-wrap gap-3">
+              {group.items.map((item, i) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: groupIndex * 0.15 + i * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-bold text-white/70 transition-all hover:bg-white/10 hover:text-white hover:border-white/20 cursor-default"
+                >
+                  {item}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
   </section>
 )
 

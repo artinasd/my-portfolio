@@ -46,14 +46,104 @@ export const CustomCursor = () => {
   )
 }
 
-export const AmbientBackground = () => (
-  <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div className="absolute -right-28 top-10 h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-[120px] animate-pulse" />
-    <div className="absolute left-[-10%] top-1/3 h-[600px] w-[600px] rounded-full bg-blue-500/10 blur-[120px]" />
-    <div className="absolute bottom-[-10%] right-1/4 h-[500px] w-[500px] rounded-full bg-violet-500/10 blur-[120px]" />
-    <div className="grid-mesh absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
-  </div>
-)
+export const AmbientBackground = () => {
+  const [particles, setParticles] = useState([])
+
+  useEffect(() => {
+    // Generate floating particles
+    const newParticles = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 2,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 15,
+      color: ['bg-emerald-400/40', 'bg-blue-400/30', 'bg-violet-400/35', 'bg-cyan-400/25'][Math.floor(Math.random() * 4)],
+    }))
+    setParticles(newParticles)
+  }, [])
+
+  return (
+    <div className="grain-overlay pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      {/* Large ambient gradient orbs with CSS animation (lighter than motion.div) */}
+      <div
+        className="absolute -right-32 -top-20 h-[700px] w-[700px] rounded-full bg-emerald-500/20 blur-[150px]"
+        style={{ animation: 'float-emerald 18s ease-in-out infinite' }}
+      />
+      <div
+        className="absolute -left-32 top-1/4 h-[650px] w-[650px] rounded-full bg-blue-500/15 blur-[140px] mix-blend-screen"
+        style={{ animation: 'float-blue 22s ease-in-out infinite' }}
+      />
+      <div
+        className="absolute -bottom-32 right-[10%] h-[600px] w-[600px] rounded-full bg-violet-500/15 blur-[130px]"
+        style={{ animation: 'float-violet 20s ease-in-out infinite' }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/10 blur-[120px]"
+        style={{ animation: 'float-cyan 16s ease-in-out infinite' }}
+      />
+
+      {/* Floating hex dot grid */}
+      <div className="grid-mesh absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
+
+      {/* Animated glow lines (subtle horizontal light streaks) */}
+      <div className="absolute left-0 right-0 top-1/4 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent blur-sm"
+           style={{ animation: 'float-emerald 12s ease-in-out infinite' }} />
+      <div className="absolute left-0 right-0 top-3/4 h-px bg-gradient-to-r from-transparent via-blue-500/15 to-transparent blur-sm"
+           style={{ animation: 'float-blue 14s ease-in-out infinite reverse' }} />
+
+      {/* Floating Particles */}
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className={`absolute rounded-full ${p.color}`}
+          style={{
+            width: p.size,
+            height: p.size,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            boxShadow: p.size > 3 ? '0 0 6px rgba(16,185,129,0.2)' : 'none',
+          }}
+          animate={{
+            y: [0, -80, 40, -30, 10, 0],
+            x: [0, 30, -40, 20, -10, 0],
+            opacity: [0, 0.9, 0.4, 0.7, 0.2, 0],
+            scale: [1, 1.5, 0.8, 1.2, 0.9, 1],
+          }}
+          transition={{
+            duration: Math.random() * 20 + 18,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: p.delay,
+          }}
+        />
+      ))}
+
+      {/* Extra large slow-moving floating flecks */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <motion.div
+          key={`fleck-${i}`}
+          className="absolute rounded-full bg-white/5"
+          style={{
+            width: Math.random() * 3 + 1,
+            height: Math.random() * 3 + 1,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -40, 20, -10, 0],
+            opacity: [0, 0.4, 0.1, 0.3, 0],
+          }}
+          transition={{
+            duration: Math.random() * 30 + 25,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: Math.random() * 20,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -73,8 +163,8 @@ export const Navbar = () => {
             <Braces size={20} strokeWidth={2.5} />
           </div>
           <span className="hidden leading-tight sm:block">
-            <strong className="block text-sm font-black tracking-tight">آرمان وب</strong>
-            <span className="text-[10px] uppercase tracking-widest text-white/40 font-mono">Studio 2026</span>
+            <strong className="block text-sm font-black tracking-tight">آرتیک وب</strong>
+            <span className="text-[10px] uppercase tracking-widest text-white/40 font-mono">ArtiQ Web</span>
           </span>
         </a>
         

@@ -84,12 +84,6 @@ const projectsData = [
   },
 ]
 
-const stackItems = [
-  'React', 'Next.js', 'TypeScript', 'TailwindCSS', 
-  'Framer Motion', 'Vite', 'Node.js', 'PostgreSQL', 
-  'Figma', 'GitHub', 'Vercel', 'Firebase'
-]
-
 export default function App() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
@@ -99,7 +93,7 @@ export default function App() {
   })
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white selection:bg-emerald-500 selection:text-white" dir="rtl">
+    <div className="min-h-screen text-white selection:bg-emerald-500 selection:text-white" dir="rtl">
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-[100%] z-[100]"
         style={{ scaleX }}
@@ -112,7 +106,7 @@ export default function App() {
         <Services services={servicesData} />
         <Projects projects={projectsData} />
         <Process />
-        <Stack items={stackItems} />
+        <Stack />
         <Testimonials />
         <Contact />
       </main>
