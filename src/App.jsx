@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { Palette, Code2, Zap, ShieldCheck } from 'lucide-react'
+import { Palette, Code2, Zap, ShieldCheck, Github } from 'lucide-react'
 
 // Modular Components
 import { CustomCursor, AmbientBackground, Navbar } from './components/Core'
@@ -56,7 +56,7 @@ const projectsData = [
     color: 'from-emerald-500/20 via-zinc-900 to-zinc-900',
     description: 'داشبورد تحلیلی با کارت‌های هوشمند، جدول‌های سریع و تجربه مدیریتی ساده.',
     image: <ProjectVisual1 />,
-    link: '#',
+    link: 'https://github.com/artinasd',
   },
   {
     title: 'لندینگ برند لوکس',
@@ -64,7 +64,7 @@ const projectsData = [
     color: 'from-violet-500/20 via-zinc-900 to-zinc-900',
     description: 'صفحه فرود داستان‌محور با تصویرسازی مینیمال و انیمیشن‌های ظریف.',
     image: <ProjectVisual2 />,
-    link: '#',
+    link: 'https://github.com/artinasd',
   },
   {
     title: 'فروشگاه محصول دیجیتال',
@@ -72,7 +72,7 @@ const projectsData = [
     color: 'from-cyan-500/20 via-zinc-900 to-zinc-900',
     description: 'تجربه خرید سریع و واکنش‌گرا با صفحه محصول چشم‌نواز و جریان پرداخت روان.',
     image: <ProjectVisual3 />,
-    link: '#',
+    link: 'https://github.com/artinasd',
   },
   {
     title: 'اپلیکیشن مدیریت وظایف',
@@ -80,7 +80,7 @@ const projectsData = [
     color: 'from-amber-500/20 via-zinc-900 to-zinc-900',
     description: 'ابزار مدیریت پروژه با قابلیت همگام‌سازی لحظه‌ای و دسترسی آفلاین.',
     image: <ProjectVisual4 />,
-    link: '#',
+    link: 'https://github.com/artinasd',
   },
 ]
 
@@ -91,6 +91,23 @@ export default function App() {
     damping: 30,
     restDelta: 0.001
   })
+
+  // Smooth scroll for anchor links
+  useEffect(() => {
+    const handleAnchorClick = (e) => {
+      const target = e.target.closest('a[href^="#"]')
+      if (!target) return
+      const href = target.getAttribute('href')
+      if (href === '#') return
+      const el = document.querySelector(href)
+      if (el) {
+        e.preventDefault()
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    document.addEventListener('click', handleAnchorClick)
+    return () => document.removeEventListener('click', handleAnchorClick)
+  }, [])
 
   return (
     <div className="min-h-screen text-white selection:bg-emerald-500 selection:text-white" dir="rtl">

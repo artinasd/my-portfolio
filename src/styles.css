@@ -20,6 +20,13 @@
     }
   }
 
+  /* Restore default cursor on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    * {
+      cursor: auto !important;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;

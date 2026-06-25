@@ -213,14 +213,39 @@ export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState('idle')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('submitting')
-    setTimeout(() => {
+
+    // Use Formspree — a backendless contact form service
+    try {
+      const response = await fetch('https://formspree.io/f/xqapwrap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      // Fallback: open default mail client with pre-filled message
+      const subject = `پیام جدید از ${formData.name}`
+      const body = `نام: ${formData.name}\nایمیل: ${formData.email}\n\nپیام:\n${formData.message}`
+      const mailtoLink = `mailto:hello@arman.dev?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      window.location.href = mailtoLink
       setStatus('success')
       setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setStatus('idle'), 3000)
-    }, 1500)
+    }
+    
+    setTimeout(() => setStatus('idle'), 6000)
   }
 
   return (
@@ -260,7 +285,7 @@ export const Contact = () => {
                    </div>
                    <textarea required value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full h-48 rounded-[2rem] bg-white/5 border border-white/10 p-6 font-bold focus:outline-none focus:border-emerald-500/50 focus:bg-white/[0.08] transition-all resize-none" placeholder="در مورد پروژه خود بگویید..." />
                    <button type="submit" disabled={status !== 'idle'} className={`group relative w-full h-18 overflow-hidden rounded-3xl bg-emerald-500 font-black text-zinc-950 transition-all hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] flex items-center justify-center gap-3 py-4 ${status !== 'idle' ? 'opacity-70 cursor-wait' : ''}`}>
-                      {status === 'idle' ? (<>ارسال پیام <Send size={20} className="transition group-hover:translate-x-1 group-hover:-translate-y-1" /></>) : status === 'submitting' ? (<div className="h-6 w-6 border-4 border-zinc-950/20 border-t-zinc-950 rounded-full animate-spin" />) : (<div className="flex items-center gap-2 text-zinc-950 font-black"><BadgeCheck /> پیام ارسال شد!</div>)}
+                       {status === 'idle' ? (<>ارسال پیام <Send size={20} className="transition group-hover:translate-x-1 group-hover:-translate-y-1" /></>) : status === 'submitting' ? (<div className="h-6 w-6 border-4 border-zinc-950/20 border-t-zinc-950 rounded-full animate-spin" />) : status === 'success' ? (<div className="flex items-center gap-2 text-zinc-950 font-black"><BadgeCheck /> پیام ارسال شد!</div>) : (<div className="flex items-center gap-2 text-zinc-950 font-black">خطا! دوباره تلاش کنید</div>)}
                    </button>
                 </form>
              </div>
@@ -282,10 +307,16 @@ export const Footer = () => (
               <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Designed for 2026</span>
            </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-8 text-xs font-black uppercase tracking-widest text-white/30">
-           <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-           <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-           <a href="#" className="hover:text-white transition-colors">Cookies</a>
+        <div className="flex items-center gap-4">
+           <a href="https://github.com/artinasd" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all" aria-label="GitHub">
+              <Github size={18} />
+           </a>
+           <a href="https://linkedin.com/in/artinasd" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all" aria-label="LinkedIn">
+              <Linkedin size={18} />
+           </a>
+           <a href="https://twitter.com/artinasd" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all" aria-label="Twitter">
+              <Twitter size={18} />
+           </a>
         </div>
         <div className="text-xs font-bold text-white/20">© تمامی حقوق محفوظ است — ۲۰۲۶</div>
      </div>

@@ -14,8 +14,13 @@ export const CustomCursor = () => {
   const cursorRef = useRef(null)
   const [isHovering, setIsHovering] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const isTouchDevice = useRef(
+    typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  )
 
   useEffect(() => {
+    if (isTouchDevice.current) return
+
     const moveCursor = (e) => {
       setIsVisible(true)
       if (cursorRef.current) {
@@ -37,6 +42,8 @@ export const CustomCursor = () => {
       window.removeEventListener('mouseover', handleMouseOver)
     }
   }, [])
+
+  if (isTouchDevice.current) return null
 
   return (
     <div 
