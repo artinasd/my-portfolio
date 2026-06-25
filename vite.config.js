@@ -1,8 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
+// vite.config.js
 export default defineConfig({
   plugins: [react()],
-  // Changed from '/my-portfolio/' to '/' for custom domain / standard root deployment
-  base: '/',
+  // Change this back to your repository name exactly
+  base: '/my-portfolio/',
 })

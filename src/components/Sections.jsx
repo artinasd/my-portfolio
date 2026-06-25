@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Braces, Star, Mail, Github, Linkedin, Twitter, BadgeCheck, Send, Monitor, Globe, Search, PenTool, Cpu, Rocket, Activity, Zap, AlertCircle } from 'lucide-react'
+import { Braces, Star, Mail, Github, Linkedin, Twitter, BadgeCheck, Search, PenTool, Cpu, Rocket, Activity, Zap, Monitor, Globe, AlertCircle } from 'lucide-react'
 
 export const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -44,6 +44,36 @@ export const Process = () => {
     )
 }
 
+const stackGroups = [
+    {
+        title: 'فرانت‌اند',
+        icon: <Monitor size={18} />,
+        color: 'from-emerald-500/20 via-emerald-500/5 to-transparent',
+        borderColor: 'border-emerald-500/20',
+        textColor: 'text-emerald-400',
+        bgColor: 'bg-emerald-500/5',
+        items: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'Framer Motion', 'Vite'],
+    },
+    {
+        title: 'بک‌اند و دیتابیس',
+        icon: <Globe size={18} />,
+        color: 'from-blue-500/20 via-blue-500/5 to-transparent',
+        borderColor: 'border-blue-500/20',
+        textColor: 'text-blue-400',
+        bgColor: 'bg-blue-500/5',
+        items: ['Node.js', 'PostgreSQL', 'Firebase'],
+    },
+    {
+        title: 'ابزار و دیزاین',
+        icon: <PenTool size={18} />,
+        color: 'from-violet-500/20 via-violet-500/5 to-transparent',
+        borderColor: 'border-violet-500/20',
+        textColor: 'text-violet-400',
+        bgColor: 'bg-violet-500/5',
+        items: ['Figma', 'GitHub', 'Vercel'],
+    },
+]
+
 export const Stack = () => (
     <section className="mx-auto max-w-7xl px-4 py-32 overflow-hidden">
         <motion.div {...fadeInUp} className="mb-16">
@@ -52,6 +82,35 @@ export const Stack = () => (
             </div>
             <h2 className="mt-6 text-4xl font-black sm:text-6xl">استک فنی ما</h2>
         </motion.div>
+        <div className="grid gap-6 md:grid-cols-3">
+            {stackGroups.map((group, groupIndex) => (
+                <motion.div
+                    key={group.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: groupIndex * 0.15 }}
+                    viewport={{ once: true }}
+                    className={`group relative overflow-hidden rounded-[2.5rem] border ${group.borderColor} ${group.bgColor} p-8 transition-all hover:shadow-glow`}
+                >
+                    <div className={`absolute inset-0 bg-gradient-to-b ${group.color} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ${group.textColor} border border-white/10`}>
+                                {group.icon}
+                            </div>
+                            <h3 className={`text-lg font-black ${group.textColor}`}>{group.title}</h3>
+                        </div>
+                        <div className="flex flex-wrap gap-3">
+                            {group.items.map((item) => (
+                                <div key={item} className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-bold text-white/70">
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            ))}
+        </div>
     </section>
 )
 
@@ -70,21 +129,18 @@ export const Testimonials = () => (
 
 export const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-    const [status, setStatus] = useState('idle') // idle, submitting, success, error
+    const [status, setStatus] = useState('idle')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setStatus('submitting')
-
         const FORMSPREE_ENDPOINT_ID = 'xojoenwr'
-
         try {
             const response = await fetch(`https://formspree.io/f/${FORMSPREE_ENDPOINT_ID}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: formData.name, email: formData.email, message: formData.message }),
             })
-
             if (response.ok) setStatus('success')
             else setStatus('error')
         } catch {
@@ -107,13 +163,12 @@ export const Contact = () => {
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col items-center justify-center text-center p-8 bg-emerald-500/10 rounded-[3rem] border border-emerald-500/20">
                                 <BadgeCheck size={64} className="text-emerald-500 mb-6" />
                                 <h3 className="text-2xl font-black">پیام شما با موفقیت ارسال شد!</h3>
-                                <p className="text-white/60 mt-2">از تماس شما سپاسگزارم. به‌زودی با شما صحبت خواهم کرد.</p>
                             </motion.div>
                         ) : status === 'error' ? (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col items-center justify-center text-center p-8 bg-red-500/10 rounded-[3rem] border border-red-500/20">
                                 <AlertCircle size={64} className="text-red-500 mb-6" />
                                 <h3 className="text-2xl font-black">متاسفم، مشکلی پیش آمد!</h3>
-                                <p className="text-white/60 mt-2 mb-6">سیستم ارسال پیام در حال حاضر در دسترس نیست. لطفاً مستقیماً به من ایمیل بزنید:</p>
+                                <p className="text-white/60 mt-2 mb-6">لطفاً مستقیماً به من ایمیل بزنید:</p>
                                 <a href="mailto:artinasd.dev@gmail.com" className="bg-white text-zinc-950 px-8 py-3 rounded-full font-black hover:bg-emerald-400 transition-colors">artinasd.dev@gmail.com</a>
                             </motion.div>
                         ) : (
@@ -141,7 +196,7 @@ export const Footer = () => (
             <div className="flex items-center gap-4">
                 <div className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"><Braces className="text-emerald-500" size={20} /></div>
                 <div>
-                    <strong className="block text-sm">آرتیک وب</strong>
+                    <strong className="block text-sm">آرتیک وب استودیو</strong>
                     <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Designed for 2026</span>
                 </div>
             </div>
