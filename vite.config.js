@@ -2,5 +2,5 @@
 export default defineConfig({
   plugins: [react()],
   // Change this back to your repository name exactly
-  base: '/my-portfolio/',
+  base: './',
 })
