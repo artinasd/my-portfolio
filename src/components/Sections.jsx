@@ -141,7 +141,7 @@ export const Footer = () => (
             <div className="flex items-center gap-4">
                 <div className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"><Braces className="text-emerald-500" size={20} /></div>
                 <div>
-                    <strong className="block text-sm">آرتین استودیو</strong>
+                    <strong className="block text-sm">آرتیک وب</strong>
                     <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Designed for 2026</span>
                 </div>
             </div>

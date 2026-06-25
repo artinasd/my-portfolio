@@ -24,7 +24,7 @@ export const UIVisual = () => (
 )
 
 export const CodeVisual = () => (
-  <div className={visualBase}>
+  <div className={visualBase} dir="ltr">
     <div className="w-full space-y-2 font-mono text-[10px]">
       <div className="flex items-center gap-2">
         <span className="text-emerald-500">const</span>
