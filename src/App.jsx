@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { Palette, Code2, Zap, ShieldCheck, Github } from 'lucide-react'
 
@@ -6,9 +6,9 @@ import { Palette, Code2, Zap, ShieldCheck, Github } from 'lucide-react'
 import { CustomCursor, AmbientBackground, Navbar } from './components/Core'
 import { Hero, Services, Projects } from './components/MainSections'
 import { Stack, Testimonials, Contact, Footer, Process } from './components/Sections'
-import { 
+import {
   UIVisual, CodeVisual, SpeedVisual, SecurityVisual,
-  ProjectVisual1, ProjectVisual2, ProjectVisual3, ProjectVisual4 
+  ProjectVisual1, ProjectVisual2, ProjectVisual3, ProjectVisual4
 } from './components/Visuals'
 
 // --- Data ---
@@ -92,42 +92,28 @@ export default function App() {
     restDelta: 0.001
   })
 
-  // Smooth scroll for anchor links
-  useEffect(() => {
-    const handleAnchorClick = (e) => {
-      const target = e.target.closest('a[href^="#"]')
-      if (!target) return
-      const href = target.getAttribute('href')
-      if (href === '#') return
-      const el = document.querySelector(href)
-      if (el) {
-        e.preventDefault()
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-    document.addEventListener('click', handleAnchorClick)
-    return () => document.removeEventListener('click', handleAnchorClick)
-  }, [])
+  // Redundant JavaScript smooth scroll logic has been completely removed.
+  // Smooth scrolling is handled natively by CSS: `html { scroll-behavior: smooth; }`
 
   return (
-    <div className="min-h-screen text-white selection:bg-emerald-500 selection:text-white" dir="rtl">
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-[100%] z-[100]"
-        style={{ scaleX }}
-      />
-      <CustomCursor />
-      <AmbientBackground />
-      <Navbar />
-      <main>
-        <Hero stats={stats} />
-        <Services services={servicesData} />
-        <Projects projects={projectsData} />
-        <Process />
-        <Stack />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+      <div className="min-h-screen text-white selection:bg-emerald-500 selection:text-white" dir="rtl">
+        <motion.div
+            className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-[100%] z-[100]"
+            style={{ scaleX }}
+        />
+        <CustomCursor />
+        <AmbientBackground />
+        <Navbar />
+        <main>
+          <Hero stats={stats} />
+          <Services services={servicesData} />
+          <Projects projects={projectsData} />
+          <Process />
+          <Stack />
+          <Testimonials />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
   )
 }
