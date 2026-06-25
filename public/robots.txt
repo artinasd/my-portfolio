@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://artinasd.github.io/my-portfolio/sitemap.xml
