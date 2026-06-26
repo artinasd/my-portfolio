@@ -13,9 +13,9 @@ import {
 
 // --- Data ---
 const stats = [
-  { value: '+۴۲', label: 'پروژه تحویل‌شده' },
-  { value: '۹۸٪', label: 'رضایت کارفرما' },
-  { value: '۲.۱s', label: 'میانگین لود صفحات' },
+  // { value: '+۴۲', label: 'پروژه تحویل‌شده' },
+  // { value: '۹۸٪', label: 'رضایت کارفرما' },
+  // { value: '۲.۱s', label: 'میانگین لود صفحات' },
 ]
 
 const servicesData = [
@@ -51,37 +51,37 @@ const servicesData = [
 
 const projectsData = [
   {
-    title: 'داشبورد SaaS مالی',
-    tag: 'React • Charts • UX',
+    title: 'پورتفولیو و وبلاگ حقوقی',
+    tag: 'React • UX',
     color: 'from-emerald-500/20 via-zinc-900 to-zinc-900',
-    description: 'داشبورد تحلیلی با کارت‌های هوشمند، جدول‌های سریع و تجربه مدیریتی ساده.',
+    description: 'طراحی و پیاده سازی صفر تا صد وبسایت موسسه حقوقی چالاکی.',
     image: <ProjectVisual1 />,
-    link: 'https://github.com/artinasd',
+    link: 'https://artinasd.github.io/static-lawyer/',
   },
   {
-    title: 'لندینگ برند لوکس',
+    title: 'طراحی فرانت اند سیستم مدیریت وظایف',
     tag: 'Branding • Motion',
     color: 'from-violet-500/20 via-zinc-900 to-zinc-900',
-    description: 'صفحه فرود داستان‌محور با تصویرسازی مینیمال و انیمیشن‌های ظریف.',
+    description: 'توسعه کامل UI و فرانت اند سیستم مدیریت وظایف از استارت آپ TickThis (در دست انتشار است).',
     image: <ProjectVisual2 />,
-    link: 'https://github.com/artinasd',
+    link: '',
   },
-  {
-    title: 'فروشگاه محصول دیجیتال',
-    tag: 'E-commerce • Tailwind',
-    color: 'from-cyan-500/20 via-zinc-900 to-zinc-900',
-    description: 'تجربه خرید سریع و واکنش‌گرا با صفحه محصول چشم‌نواز و جریان پرداخت روان.',
-    image: <ProjectVisual3 />,
-    link: 'https://github.com/artinasd',
-  },
-  {
-    title: 'اپلیکیشن مدیریت وظایف',
-    tag: 'PWA • Firebase',
-    color: 'from-amber-500/20 via-zinc-900 to-zinc-900',
-    description: 'ابزار مدیریت پروژه با قابلیت همگام‌سازی لحظه‌ای و دسترسی آفلاین.',
-    image: <ProjectVisual4 />,
-    link: 'https://github.com/artinasd',
-  },
+  // {
+  //   title: 'فروشگاه محصول دیجیتال',
+  //   tag: 'E-commerce • Tailwind',
+  //   color: 'from-cyan-500/20 via-zinc-900 to-zinc-900',
+  //   description: 'تجربه خرید سریع و واکنش‌گرا با صفحه محصول چشم‌نواز و جریان پرداخت روان.',
+  //   image: <ProjectVisual3 />,
+  //   link: 'https://github.com/artinasd',
+  // },
+  // {
+  //   title: 'اپلیکیشن مدیریت وظایف',
+  //   tag: 'PWA • Firebase',
+  //   color: 'from-amber-500/20 via-zinc-900 to-zinc-900',
+  //   description: 'ابزار مدیریت پروژه با قابلیت همگام‌سازی لحظه‌ای و دسترسی آفلاین.',
+  //   image: <ProjectVisual4 />,
+  //   link: 'https://github.com/artinasd',
+  // },
 ]
 
 export default function App() {
@@ -110,7 +110,7 @@ export default function App() {
           <Projects projects={projectsData} />
           <Process />
           <Stack />
-          <Testimonials />
+          {/*<Testimonials />*/}
           <Contact />
         </main>
         <Footer />

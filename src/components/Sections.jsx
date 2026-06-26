@@ -11,10 +11,30 @@ export const fadeInUp = {
 
 export const Process = () => {
     const steps = [
-        { number: '۰۱', title: 'تحقیق و استراتژی', desc: 'تحلیل نیازهای کسب‌وکار، بررسی رقبا، تعریف مخاطبان هدف و تدوین سند استراتژی پروژه برای همسویی کامل.', icon: <Search className="text-emerald-400" size={24} /> },
-        { number: '۰۲', title: 'طراحی رابط و تجربه کاربری', desc: 'خلق معماری اطلاعات، ساخت وایرفریم‌ها، پیاده‌سازی هویت بصری مدرن و دیزاین سیستم یکپارچه در Figma.', icon: <PenTool className="text-cyan-400" size={24} /> },
-        { number: '۰۳', title: 'توسعه فنی و کدنویسی', desc: 'پیاده‌سازی کامپوننت‌های واکنش‌گرا و بهینه با React و TailwindCSS با معماری خوانا و استانداردهای تمیز.', icon: <Cpu className="text-indigo-400" size={24} /> },
-        { number: '۰۴', title: 'تست، سئو و استقرار', desc: 'بررسی همه‌جانبه پرفورمنس و امنیت، بهینه‌سازی Core Web Vitals، سئو فنی و انتشار نهایی روی بستر ابر.', icon: <Rocket className="text-violet-400" size={24} /> },
+        {
+            number: '۰۱',
+            title: 'تحقیق و استراتژی',
+            desc: 'تحلیل نیازهای کسب‌وکار، بررسی رقبا، تعریف مخاطبان هدف و تدوین سند استراتژی پروژه برای همسویی کامل.',
+            icon: <Search className="text-emerald-400" size={24} />
+        },
+        {
+            number: '۰۲',
+            title: 'طراحی رابط و تجربه کاربری',
+            desc: 'خلق معماری اطلاعات، ساخت وایرفریم‌ها، پیاده‌سازی هویت بصری مدرن و توسعه دیزاین سیستم یکپارچه.',
+            icon: <PenTool className="text-cyan-400" size={24} />
+        },
+        {
+            number: '۰۳',
+            title: 'معماری سیستم و توسعه فنی',
+            desc: 'طراحی زیرساخت و معماری کلان، توسعه منطق بک‌اند امن و پیاده‌سازی رابط کاربری واکنش‌گرا با React و TailwindCSS.',
+            icon: <Cpu className="text-indigo-400" size={24} />
+        },
+        {
+            number: '۰۴',
+            title: 'تست، سئو و استقرار',
+            desc: 'بررسی همه‌جانبه پرفورمنس و امنیت، بهینه‌سازی Core Web Vitals، سئو فنی و انتشار نهایی روی بستر ابر.',
+            icon: <Rocket className="text-violet-400" size={24} />
+        }
     ]
 
     return (
@@ -61,7 +81,7 @@ const stackGroups = [
         borderColor: 'border-blue-500/20',
         textColor: 'text-blue-400',
         bgColor: 'bg-blue-500/5',
-        items: ['Node.js', 'PostgreSQL', 'Firebase'],
+        items: ['Node.js', 'PostgreSQL', 'Supabase', 'Express', 'SQLite'],
     },
     {
         title: 'ابزار و دیزاین',
